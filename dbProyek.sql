@@ -99,12 +99,39 @@ CREATE TABLE DETAILRESEP(
 CREATE OR REPLACE TRIGGER obat_seq_tr
 BEFORE INSERT ON obat FOR EACH ROW
 DECLARE
-	NUM1 NUMBER;
-	TEMP VARCHAR2(10);
+	kodemember varchar2(20);
+	tempMax number;
 BEGIN
-	 TEMP:=UPPER(SUBSTR(:NEW.NamaObat,1,3));
-	 SELECT COUNT(*) INTO NUM1 FROM obat WHERE kdobat LIKE '%'||TEMP||'%';
-	 TEMP:= TEMP||LPAD(NUM1+1,3,'0');
-	 :NEW.kdobat := TEMP;
+	if(instr(:new.namaobat,' ')=0)then
+		kodemember:=upper(substr(:new.namaobat,1,2));
+	else
+		kodemember:=upper(substr(:new.namaobat,1,1))||upper(substr(:new.namaobat,instr(:new.namaobat,' ')+1,1));
+	end if;
+	select to_number(max(substr(kdobat,-1,3))) into tempMax from obat where kdobat like kodemember||'%';
+	if tempMax is null then
+		tempMax:=0;
+	end if;
+	tempMax:=tempMax+1;
+	:new.kdobat:=kodemember||lpad(tempMax,3,'0');
+END;
+/
+
+CREATE OR REPLACE TRIGGER jenis_seq_tr
+BEFORE INSERT ON jenis FOR EACH ROW
+DECLARE
+	kodemember varchar2(20);
+	tempMax number;
+BEGIN
+	if(instr(:new.nmjenis,' ')=0)then
+		kodemember:=upper(substr(:new.nmjenis,1,2));
+	else
+		kodemember:=upper(substr(:new.nmjenis,1,1))||upper(substr(:new.nmjenis,instr(:new.nmjenis,' ')+1,1));
+	end if;
+	select to_number(max(substr(kdjenis,-1,3))) into tempMax from jenis where kdjenis like kodemember||'%';
+	if tempMax is null then
+		tempMax:=0;
+	end if;
+	tempMax:=tempMax+1;
+	:new.kdjenis:=kodemember||tempMax;
 END;
 /
