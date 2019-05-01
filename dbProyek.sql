@@ -135,3 +135,23 @@ BEGIN
 	:new.kdjenis:=kodemember||tempMax;
 END;
 /
+
+CREATE OR REPLACE TRIGGER dokter_seq_tr
+BEFORE INSERT ON dokter FOR EACH ROW
+DECLARE
+	kodemember varchar2(20);
+	tempMax number;
+BEGIN
+	if(instr(:new.namadokter,' ')=0)then
+		kodemember:=upper(substr(:new.namadokter,1,2));
+	else
+		kodemember:=upper(substr(:new.namadokter,1,1))||upper(substr(:new.namadokter,instr(:new.namadokter,' ')+1,1));
+	end if;
+	select to_number(max(substr(kddokter,-1,3))) into tempMax from dokter where kddokter like kodemember||'%';
+	if tempMax is null then
+		tempMax:=0;
+	end if;
+	tempMax:=tempMax+1;
+	:new.kddokter:=kodemember||tempMax;
+END;
+/
