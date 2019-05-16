@@ -1,0 +1,10 @@
+insert into hjualresep values('','WM001','JR1','AC001',to_date('09/01/2019','dd/mm/yyyy'),1,'1');
+insert into hjualresep values('','VT001','SB1','AC001',to_date('12/02/2019','dd/mm/yyyy'),3,'1');
+insert into hjualresep values('','TS001','SS1','LS001',to_date('15/02/2019','dd/mm/yyyy'),5,'1');
+insert into hjualresep values('','SV001','GE1','MD001',to_date('21/03/2019','dd/mm/yyyy'),2,'1');
+insert into hjualresep values('','SH001','YH1','PT001',to_date('24/03/2019','dd/mm/yyyy'),3,'1');
+insert into hjualresep values('','SE001','AM1','WH001',to_date('29/03/2019','dd/mm/yyyy'),1,'1');
+insert into hjualresep values('','RB001','FM1','SL001',to_date('02/04/2019','dd/mm/yyyy'),3,'1');
+insert into hjualresep values('','PS001','JV1','SL001',to_date('05/04/2019','dd/mm/yyyy'),2,'0');
+insert into hjualresep values('','LK001','TC1','GS001',to_date('08/04/2019','dd/mm/yyyy'),6,'0');
+insert into hjualresep values('','KC001','AT1','DC001',to_date('25/04/2019','dd/mm/yyyy'),2 ,'0');
