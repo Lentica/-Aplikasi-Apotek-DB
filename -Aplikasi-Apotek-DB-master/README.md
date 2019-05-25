@@ -1,2 +1,0 @@
-# -Aplikasi-Apotek
-Aplikasi Apotek
